@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => Products(),
+      create: (_) => new Products(),
       child: MaterialApp(
         title: 'Minha Loja',
         theme: ThemeData(

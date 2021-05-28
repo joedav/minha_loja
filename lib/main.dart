@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       ],
       // create: (_) => new Products(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Minha Loja',
         theme: ThemeData(
           primarySwatch: Colors.purple,

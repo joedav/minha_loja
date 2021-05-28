@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minha_loja/providers/cart.dart';
+import 'package:minha_loja/views/cart_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/app_routes.dart';
@@ -29,10 +30,14 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.purple,
           accentColor: Colors.deepOrange,
           fontFamily: 'Lato',
+          primaryTextTheme: TextTheme(
+            headline6: TextStyle(color: Colors.white),
+          ),
         ),
         home: ProducstOverviewScreen(),
         routes: {
           AppRoutes.PRODUCT_DETAIL: (ctx) => ProductDetailScreen(),
+          AppRoutes.CART_SCREEN: (ctx) => CartScreen(),
         },
       ),
     );

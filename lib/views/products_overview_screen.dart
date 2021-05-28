@@ -49,14 +49,15 @@ class _ProducstOverviewScreenState extends State<ProducstOverviewScreen> {
             ],
           ),
           Consumer<Cart>(
-            builder: (ctx, cart, _) => Badge(
-              value: cart.itemCount.toString(),
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.shopping_cart),
-              ),
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.shopping_cart),
             ),
-          )
+            builder: (_, cart, child) => Badge(
+              value: cart.itemCount.toString(),
+              child: child,
+            ),
+          ),
         ],
       ),
       body: ProductGrid(_showFavoriteOnly),

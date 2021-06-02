@@ -55,7 +55,7 @@ class _ProducstOverviewScreenState extends State<ProducstOverviewScreen> {
             //   icon: Icon(Icons.shopping_cart),
             // ),
             builder: (_, cart, child) => Badge(
-              value: cart.itemCount.toString(),
+              value: cart.itemsCount.toString(),
               // child: child,
               child: IconButton(
                 onPressed: () => Navigator.of(context).pushNamed(

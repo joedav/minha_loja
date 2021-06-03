@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minha_loja/providers/cart.dart';
+import 'package:minha_loja/providers/orders_provider.dart';
 import 'package:minha_loja/widgets/cart_item_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -31,15 +32,19 @@ class CartScreen extends StatelessWidget {
                   ),
                   Chip(
                     label: Text(
-                      'R\$${cart.totalAmont}',
+                      'R\$${cart.totalAmont.toStringAsFixed(2)}',
                       style: TextStyle(color: Colors.white),
                     ),
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
                   Spacer(),
                   TextButton(
-                    onPressed: () {},
                     child: Text('Finalizar Compra'),
+                    onPressed: () {
+                      Provider.of<Orders>(context, listen: false)
+                          .addOrder(cart);
+                      cart.clear();
+                    },
                   ),
                 ],
               ),

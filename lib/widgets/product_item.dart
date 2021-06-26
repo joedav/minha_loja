@@ -20,8 +20,10 @@ class ProductItem extends StatelessWidget {
         child: Row(
           children: [
             IconButton(
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(AppRoutes.PRODUCTS_FORM),
+                onPressed: () => Navigator.of(context).pushNamed(
+                      AppRoutes.PRODUCTS_FORM,
+                      arguments: product,
+                    ),
                 icon: Icon(
                   Icons.edit_outlined,
                 )),

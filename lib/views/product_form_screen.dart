@@ -32,6 +32,21 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
     }
   }
 
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (_formData.isEmpty) {
+      final product = ModalRoute.of(context)!.settings.arguments as Product;
+      _formData['id'] = product.id!;
+      _formData['title'] = product.title;
+      _formData['description'] = product.description;
+      _formData['price'] = product.price;
+      _formData['imageUrl'] = product.imageUrl;
+
+      _imageUrlController.text = _formData['imageUrl'] as String;
+    }
+  }
+
   bool isValidImageUrl(String url) {
     bool startsWithHttp = url.toLowerCase().startsWith('http://');
     bool startsWithHttps = url.toLowerCase().startsWith('https://');
@@ -61,19 +76,21 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
 
     _form.currentState!.save();
 
-    final newProduct = Product(
-      id: Random().nextDouble().toString(),
+    final product = Product(
+      id: _formData['id'] as String,
       title: _formData['title'] as String,
       price: _formData['price'] as double,
       description: _formData['description'] as String,
       imageUrl: _formData['imageUrl'] as String,
     );
 
-    Provider.of<Products>(
+    final products = Provider.of<Products>(
       context,
       listen: false,
-    ).addProduct(newProduct);
-
+    );
+    _formData['id'] == null
+        ? products.addProduct(product)
+        : products.updateProduct(product);
     Navigator.of(context).pop();
   }
 
@@ -96,6 +113,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
           child: ListView(
             children: [
               TextFormField(
+                initialValue: _formData['title'] as String,
                 decoration: InputDecoration(labelText: 'Título'),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) {
@@ -113,6 +131,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                 },
               ),
               TextFormField(
+                initialValue: _formData['price'].toString(),
                 decoration: InputDecoration(labelText: 'Preço'),
                 textInputAction: TextInputAction.next,
                 focusNode: _priceFocusNode,
@@ -130,6 +149,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                 },
               ),
               TextFormField(
+                initialValue: _formData['description'] as String,
                 decoration: InputDecoration(labelText: 'Descição'),
                 // textInputAction: TextInputAction.next,
                 maxLines: 3,
@@ -153,6 +173,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                 children: [
                   Expanded(
                     child: TextFormField(
+                      // initialValue: _formData['imageUrl'] as String,
                       decoration: InputDecoration(labelText: 'URL da imagem'),
                       textInputAction: TextInputAction.done,
                       focusNode: _imageURLFocusNode,

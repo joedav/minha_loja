@@ -117,7 +117,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
           child: ListView(
             children: [
               TextFormField(
-                initialValue: _formData['title'] as String,
+                initialValue: _formData['title'] as String?,
                 decoration: InputDecoration(labelText: 'Título'),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) {
@@ -153,7 +153,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                 },
               ),
               TextFormField(
-                initialValue: _formData['description'] as String,
+                initialValue: _formData['description'] as String?,
                 decoration: InputDecoration(labelText: 'Descição'),
                 // textInputAction: TextInputAction.next,
                 maxLines: 3,
